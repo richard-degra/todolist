@@ -5,22 +5,17 @@
   </head>
   <body>
     <h1>Minha Todolist</h1>
-    <form>
+    <form class="col-6 mx-auto" action="/novotodo" method="POST">
         <label>
           Nome do Todo:
-          <input type="text" placeholder="Digite um Todo" name="item" value="teste">
+          <input type="text" placeholder="Digite um Todo" name="item" value="Todo de teste">
         </label>
         <button type="submit">
           Adicionar Todo
         </button>
       </form>
-      <div class="row">
-        <ul class="col-6 mx-auto">
-            <% todo.forEach(function(todo) { %>
-                <li><%= todo.item %></li>
-              <% }) %>
-        </ul>  
-      </div> 
-      
+      <% for(var i = 0; i < todoList.length; i++) { %>
+        <li> <%= todoList[i].name %></li>
+      <% } %>
   </body>
 </html>

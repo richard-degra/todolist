@@ -1,20 +1,38 @@
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+// conexão mongoose //
+
+mongoose.connect("mongodb://localhost/todo");
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 
-var todo = [
-    "Lavar o carro",
-    "Sair de casa"
-]
+// Schema do Mongoose
+
+const todoSchema = new mongoose.Schema({
+    name: String
+});
+
+var Todo = mongoose.model("Todo", todoSchema);
+
+//var todoList = [
+    //"Lavar o carro",
+    //"Sair de casa"
+//]
 
 
 // Rotas começam por aqui //
 
 app.get('/', function(req, res) {
-    res.render('index.ejs');
+    Todo.find({}, function(err, todoList) {
+        if(err) console.log(err);
+        else {
+           res.render('index.ejs', {todoList: todoList}); 
+        }
+    })   
 });
 
 // Caminho para todas as outras rotas //
@@ -27,8 +45,14 @@ app.get('*', function(req, res) {
 
 app.post('/novotodo', function(req,res) {
     console.log("Todo criado")
-    var item = req.body.item;
-    todo.push(item);
+    var NewItem = new Todo ({
+        name: req.body.item});
+    Todo.create(NewItem, function(err, Todo) {
+        if (err) console.log(err);
+        else {
+            console.log("Novo Todo: " + NewItem);
+        }
+    });
     res.redirect('/');
 })
 
