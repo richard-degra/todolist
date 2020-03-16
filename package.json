@@ -17,11 +17,8 @@
   },
   "homepage": "https://github.com/richard-degra/todolist#readme",
   "dependencies": {
-<<<<<<< HEAD
     "body-parser": "^1.19.0",
     "ejs": "^3.0.1",
-=======
->>>>>>> 29c527d9d1f788254f748465377a50fa4d952b63
     "express": "^4.17.1"
   }
 }
