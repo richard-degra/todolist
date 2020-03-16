@@ -10,6 +10,7 @@ var todo = [
     "Sair de casa"
 ]
 
+
 // Rotas começam por aqui //
 
 app.get('/', function(req, res) {
@@ -35,4 +36,5 @@ app.post('/novotodo', function(req,res) {
 
 app.listen(1234, function() {
     console.log("servidor iniciado com sucesso na porta 1234");
+
 });
